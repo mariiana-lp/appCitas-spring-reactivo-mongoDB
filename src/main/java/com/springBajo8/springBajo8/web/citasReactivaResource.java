@@ -49,14 +49,22 @@ public class citasReactivaResource {
         return this.icitasReactivaService.findAll();
     }
 
-    @GetMapping("/citasReactivas/prueba")
-    private Flux<citasDTOReactiva> findAllX(){
-        return this.icitasReactivaService.findAll();
-    }
+    //@GetMapping("/citasReactivas/prueba")
+    //private Flux<citasDTOReactiva> findAllX(){
+       // return this.icitasReactivaService.findAll();
+    //}
 
     @PutMapping("/citasReactivas/{id}/cancelDate")
-    private Mono<citasDTOReactiva> cancelDate(@PathVariable("id") String id){
-        return this.icitasReactivaService.cancelDate(id);
+    private Mono<ResponseEntity<citasDTOReactiva>> cancelDate(@PathVariable("id") String id, @RequestBody citasDTOReactiva citasDTOReactiva){
+        return this.icitasReactivaService.cancelDate(id, citasDTOReactiva)
+                .flatMap(citasDTOReactiva1 -> Mono.just(ResponseEntity.ok(citasDTOReactiva1)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+    }
+
+    @GetMapping("/citasReactivas/citasA")
+    private Flux<citasDTOReactiva> findAllByDateAndHour(){
+        //return this.icitasReactivaService.findAllByDateAndHour(date, "10:00 am");
+        return  this.icitasReactivaService.findAll();
     }
     
 

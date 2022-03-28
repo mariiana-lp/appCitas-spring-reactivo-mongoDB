@@ -7,9 +7,13 @@ import com.springBajo8.springBajo8.domain.citasDTOReactiva;
 import com.springBajo8.springBajo8.repository.IcitasReactivaRepository;
 import com.springBajo8.springBajo8.service.IcitasReactivaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.sql.Array;
+import java.time.LocalDate;
 
 @Service
 public class citasReactivaServiceImpl implements IcitasReactivaService {
@@ -57,13 +61,21 @@ public class citasReactivaServiceImpl implements IcitasReactivaService {
     }
 
     @Override
-    public Mono<citasDTOReactiva> cancelDate(String id){
+    public Mono<citasDTOReactiva> cancelDate(String id, citasDTOReactiva citasDTOReactivas){
         return this.IcitasReactivaRepository.findById(id)
-                .map((citasDTOReactiva) -> {
-                    if (!citasDTOReactiva.getEstadoReservaCita().equalsIgnoreCase("Cancelado")){
-                        citasDTOReactiva.setEstadoReservaCita("Cancelado");
+                .map((citasDTOReactiva1) -> {
+                    if (!citasDTOReactivas.getEstadoReservaCita().equalsIgnoreCase("Cancelado")){
+                        citasDTOReactivas.setEstadoReservaCita("Cancelado");
                     }
-                    return citasDTOReactiva;
+                    return citasDTOReactivas;
                 }).switchIfEmpty(Mono.empty());
     }
+
+    @Override
+    public Flux<citasDTOReactiva> findAllByDateAndHour(String date, String hour){
+        String [] fechaConvertida = date.split("-");
+        return this.IcitasReactivaRepository.findAllByDateAndHour(LocalDate.of(Integer.parseInt(fechaConvertida[0]),
+                Integer.parseInt(fechaConvertida[1]), Integer.parseInt(fechaConvertida[2])), hour);
+    }
+
 }

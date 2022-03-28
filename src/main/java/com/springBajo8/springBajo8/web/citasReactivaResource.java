@@ -22,6 +22,7 @@ public class citasReactivaResource {
         return this.icitasReactivaService.save(citasDTOReactiva);
     }
 
+
     @DeleteMapping("/citasReactivas/{id}")
     private Mono<ResponseEntity<citasDTOReactiva>> delete(@PathVariable("id") String id) {
         return this.icitasReactivaService.delete(id)
@@ -47,5 +48,17 @@ public class citasReactivaResource {
     private Flux<citasDTOReactiva> findAll() {
         return this.icitasReactivaService.findAll();
     }
+
+    @GetMapping("/citasReactivas/prueba")
+    private Flux<citasDTOReactiva> findAllX(){
+        return this.icitasReactivaService.findAll();
+    }
+
+    @PutMapping("/citasReactivas/{id}/cancelDate")
+    private Mono<citasDTOReactiva> cancelDate(@PathVariable("id") String id){
+        return this.icitasReactivaService.cancelDate(id);
+    }
+    
+
 
 }

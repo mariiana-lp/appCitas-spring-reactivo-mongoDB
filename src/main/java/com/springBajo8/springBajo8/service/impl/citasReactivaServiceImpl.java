@@ -14,6 +14,8 @@ import reactor.core.publisher.Mono;
 
 import java.sql.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class citasReactivaServiceImpl implements IcitasReactivaService {
@@ -78,11 +80,23 @@ public class citasReactivaServiceImpl implements IcitasReactivaService {
                 Integer.parseInt(fechaConvertida[1]), Integer.parseInt(fechaConvertida[2])), hour);
     }
 
-    @Override
+  /*  @Override
     public Mono<citasDTOReactiva> findDoctor(String id) {
         return this.IcitasReactivaRepository.findById(id)
                 .map(cita -> {
                    return new citasDTOReactiva(id, cita.getNombreMedico(), cita.getApellidosMedico());
+                }).switchIfEmpty(Mono.empty());
+    }*/
+
+    @Override
+    public Mono<List<String>> findDoctor(String id) {
+        //List<String> list = new ArrayList<>();
+        return this.IcitasReactivaRepository.findById(id)
+                .map(cita -> {
+                    List<String> list = new ArrayList<>();
+                    list.add(cita.getNombreMedico());
+                    list.add(cita.getApellidosMedico());
+                   return list;
                 }).switchIfEmpty(Mono.empty());
     }
 

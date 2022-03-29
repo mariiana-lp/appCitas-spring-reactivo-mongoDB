@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @RestController
 public class citasReactivaResource {
 
@@ -71,9 +73,10 @@ public class citasReactivaResource {
     }
 
     @GetMapping("citasReactivas/doctor/{citaId}")
-    private Mono<ResponseEntity<citasDTOReactiva>> getDoctor(@PathVariable String citaId) {
+    private Mono<ResponseEntity<List<String>>> getDoctor(@PathVariable String citaId) {
         return this.icitasReactivaService.findDoctor(citaId)
-                .flatMap(cita -> Mono.just(ResponseEntity.ok(cita)));
+                .flatMap(cita -> Mono.just(ResponseEntity.ok(cita)))
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
 

@@ -6,6 +6,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface IcitasReactivaService {
     Mono<citasDTOReactiva> save(citasDTOReactiva citasDTOReactiva);
@@ -24,5 +25,5 @@ public interface IcitasReactivaService {
 
     Flux<citasDTOReactiva> findAllByDateAndHour(String date, String hour);
 
-    Mono<citasDTOReactiva> findDoctor(String id);
+    Mono<List<String>> findDoctor(String id);
 }

@@ -4,6 +4,7 @@ package com.springBajo8.springBajo8.web;
 import com.springBajo8.springBajo8.domain.citasDTOReactiva;
 import com.springBajo8.springBajo8.service.IcitasReactivaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -67,6 +68,12 @@ public class citasReactivaResource {
             @RequestParam(value = "hour") String hour
         ){
         return this.icitasReactivaService.findAllByDateAndHour(date, hour);
+    }
+
+    @GetMapping("citasReactivas/doctor/{citaId}")
+    private Mono<ResponseEntity<citasDTOReactiva>> getDoctor(@PathVariable String citaId) {
+        return this.icitasReactivaService.findDoctor(citaId)
+                .flatMap(cita -> Mono.just(ResponseEntity.ok(cita)));
     }
 
 }

@@ -23,4 +23,6 @@ public interface IcitasReactivaService {
     Mono<citasDTOReactiva> cancelDate(String id, citasDTOReactiva citasDTOReactiva);
 
     Flux<citasDTOReactiva> findAllByDateAndHour(String date, String hour);
+
+    Mono<citasDTOReactiva> findDoctor(String id);
 }

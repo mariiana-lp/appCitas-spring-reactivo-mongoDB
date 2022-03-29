@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 
 import java.sql.Array;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class citasReactivaServiceImpl implements IcitasReactivaService {
@@ -85,5 +86,6 @@ public class citasReactivaServiceImpl implements IcitasReactivaService {
                    return new citasDTOReactiva(id, cita.getNombreMedico(), cita.getApellidosMedico());
                 }).switchIfEmpty(Mono.empty());
     }
+    
 
 }

@@ -76,4 +76,7 @@ public class citasReactivaResource {
                 .flatMap(cita -> Mono.just(ResponseEntity.ok(cita)));
     }
 
+
+
+
 }

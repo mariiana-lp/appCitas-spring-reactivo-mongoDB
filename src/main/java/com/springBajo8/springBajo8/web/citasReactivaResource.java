@@ -61,12 +61,12 @@ public class citasReactivaResource {
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
-    @GetMapping("/citasReactivas/citasA")
-    private Flux<citasDTOReactiva> findAllByDateAndHour(){
-        //return this.icitasReactivaService.findAllByDateAndHour(date, "10:00 am");
-        return  this.icitasReactivaService.findAll();
+    @GetMapping("/citasReactivas/queries")
+    private Flux<citasDTOReactiva> findAllByDateAndHour(
+            @RequestParam(value = "date") String date,
+            @RequestParam(value = "hour") String hour
+        ){
+        return this.icitasReactivaService.findAllByDateAndHour(date, hour);
     }
-    
-
 
 }

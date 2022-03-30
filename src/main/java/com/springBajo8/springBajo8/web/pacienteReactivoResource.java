@@ -14,7 +14,7 @@ public class pacienteReactivoResource {
     @Autowired
     private pacienteService pacienteService;
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private Mono<pacienteDTOReactivo> save (@RequestBody pacienteDTOReactivo pacienteDTOReactivo){
         return this.pacienteService.save(pacienteDTOReactivo);

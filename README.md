@@ -1,6 +1,3 @@
-"# clinica-spring-mongoDB" 
-"# clinicacitas-spring-mongoDB" 
-"# appCitas-spring-mongoDB" 
-"# appCitas-spring-mongoDB" 
-"# appCitas-spring-mongoDB" 
-"# appCitas-spring-reactivo-mongoDB" 
+Actividad App citas medicas
+Realizado por: -Alexander Hernandez
+- Mariana Lopez Perez

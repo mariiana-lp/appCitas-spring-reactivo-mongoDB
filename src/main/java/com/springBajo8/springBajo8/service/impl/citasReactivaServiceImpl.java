@@ -80,14 +80,6 @@ public class citasReactivaServiceImpl implements IcitasReactivaService {
                 Integer.parseInt(fechaConvertida[1]), Integer.parseInt(fechaConvertida[2])), hour);
     }
 
-  /*  @Override
-    public Mono<citasDTOReactiva> findDoctor(String id) {
-        return this.IcitasReactivaRepository.findById(id)
-                .map(cita -> {
-                   return new citasDTOReactiva(id, cita.getNombreMedico(), cita.getApellidosMedico());
-                }).switchIfEmpty(Mono.empty());
-    }*/
-
     @Override
     public Mono<List<String>> findDoctor(String id) {
         //List<String> list = new ArrayList<>();
